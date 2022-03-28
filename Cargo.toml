@@ -1,0 +1,37 @@
+[package]
+edition = "2021"
+name = "rust-twoslash"
+version = "0.1.0"
+
+[dependencies]
+anyhow = "1.0.56"
+lazy_static = "1.4.0"
+regex = "1.5.5"
+serde = "1.0.136"
+serde_derive = "1.0.136"
+serde_json = "1.0.79"
+tempfile = "3.3.0"
+
+[dependencies.ra]
+package = "rust-analyzer"
+path = "vendor/rust-analyzer/crates/rust-analyzer"
+
+[dependencies.ra-ide]
+package = "ide"
+path = "vendor/rust-analyzer/crates/ide"
+
+[dependencies.ra-ide_db]
+package = "ide_db"
+path = "vendor/rust-analyzer/crates/ide_db"
+
+[dependencies.ra-project_model]
+package = "project_model"
+path = "vendor/rust-analyzer/crates/project_model"
+
+[dependencies.ra-syntax]
+package = "syntax"
+path = "vendor/rust-analyzer/crates/syntax"
+
+[dependencies.ra-vfs]
+package = "vfs"
+path = "vendor/rust-analyzer/crates/vfs"
