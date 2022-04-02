@@ -496,8 +496,7 @@ impl Cut {
             })
             .unwrap_or_else(|| {
                 let end_offset = basis.len() as u32;
-                let end_line = line_index.line_col(TextSize::from(end_offset as u32)).line;
-                let end_line = std::cmp::max(end_line, start_line + 1);
+                let end_line = line_index.line_col(TextSize::from(end_offset as u32)).line + 1;
                 (end_line, end_offset)
             });
         let substr = basis[start_offset as usize..end_offset as usize].to_string();

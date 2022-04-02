@@ -7,9 +7,9 @@ import { lock } from "proper-lockfile";
 
 import type { TwoSlashReturn } from "@typescript/twoslash";
 
-const RUST_TWOSLASH_BIN = "rust-twoslash";
-
 const SERVER_TABLE_FILE = "/tmp/twoslash-rust-servers.json";
+
+export const DEFAULT_SERVER_BINARY_IN_PATH = "rust-twoslash";
 
 export type UUID = string & { _brand: "uuid" };
 export type Address = string & { _brand: "address" };
@@ -66,7 +66,7 @@ async function getServer(uuid: UUID): Promise<[string, number]> {
   });
 }
 
-export async function startServer(useCargo: boolean = false, projectName?: string): Promise<Server> {
+export async function startServer(useCargo: boolean = false, projectName?: string, serverBinaryPath: string = DEFAULT_SERVER_BINARY_IN_PATH): Promise<Server> {
   const uuid = uuidv4() as UUID;
 
   const env: Record<string, string> = {
@@ -78,7 +78,7 @@ export async function startServer(useCargo: boolean = false, projectName?: strin
     env.TWOSLASH_PROJECT_NAME = projectName;
   }
 
-  const child = cp.spawn(RUST_TWOSLASH_BIN, [], {
+  const child = cp.spawn(serverBinaryPath, [], {
     env,
     detached: true,
     stdio: ["ignore", "pipe", "ignore"],
@@ -154,8 +154,8 @@ export async function shutdownServer(serverId: UUID) {
   });
 }
 
-export function runStandalone(code: string): TwoSlashReturn {
-  const result = cp.spawnSync(RUST_TWOSLASH_BIN, [], { input: code, encoding: "utf8" });
+export function runStandalone(code: string, serverBinaryPath: string): TwoSlashReturn {
+  const result = cp.spawnSync(serverBinaryPath, [], { input: code, encoding: "utf8" });
 
   return JSON.parse(result.stdout);
 }

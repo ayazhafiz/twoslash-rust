@@ -1,5 +1,5 @@
 {
-  "include": ["js"],
+  "include": ["js", "test"],
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -7,7 +7,6 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./js",
 
     "strict": true,
     "noImplicitAny": true,
